@@ -1,0 +1,262 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Test API ",
+        "version": "0.0.1-SNAPSHOT",
+        "title": "Test API"
+    },
+    "host": "localhost:1234",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Bank"
+        }
+    ],
+    "paths": {
+        "/bank": {
+            "get": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "Get list of available bank",
+                "operationId": "getBankList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/GetBankListRS"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "Create Bank",
+                "operationId": "createBank",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateBankRQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CreateBankRS"
+                        }
+                    }
+                }
+            }
+        },
+        "/bank/{id}": {
+            "get": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "Get detail bank",
+                "operationId": "getBank",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of bank",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/GetBankRS"
+                        }
+                    }
+                }
+            },
+             "put": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "Update bank",
+                "operationId": "updateBank",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateBankRQ"
+                        }
+                    }
+                ],
+                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/GenericRS"
+                        }
+                    }
+                }
+            },
+             "delete": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "Delete Bank",
+                "operationId": "deleteBank",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/GenericRS"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Bank": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "40ae21b6-c002-46b7-99f2-3a70bc3164a"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "12345-CODE"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Bank Sejahtera"
+                },
+                "status": {
+                    "type": "boolean",
+                    "example": "Status Bank"
+                }
+            }
+        },
+        "GetBankListRS": {
+            "type": "object",
+            "properties": {
+            	"results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bank"
+                    }
+                },
+                "error": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "example": "101"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "this is error"
+                        }
+                    }
+                }
+            }
+        },
+        "GetBankRS": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "40ae21b6-c002-46b7-99f2-3a70bc3164a"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "12345-CODE"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Bank Sejahtera"
+                },
+                "status": {
+                    "type": "boolean",
+                    "example": "Status Bank"
+                },
+                "error": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "example": "101"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "this is error"
+                        }
+                    }
+                }
+            }
+        },
+         "CreateBankRQ": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "40ae21b6-c002-46b7-99f2-3a70bc3164a"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Bank Sejahtera"
+                }
+            }
+        },
+        "CreateBankRS": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "40ae21b6-c002-46b7-99f2-3a70bc3164a"
+                }
+            }
+        },
+        "GenericRS": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "example": "101"
+                        },
+                        "message": {
+                            "type": "string",
+                            "example": "this is error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
